@@ -4,50 +4,43 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script>
-
-        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     </head>
-    <body>
-
+    <body ng-app="myProgressBarApp" ng-controller="myCtrl">
+    <input type="text" ng-model="name">
         <svg height="200" width="200">
         <circle id="_cir_P_x" cx="100" cy="100" r="60" stroke="#004C70" stroke-width="20" fill="#E0CC97"></circle>
         <circle id="_cir_P_y" cx="100" cy="100" r="60" stroke="#E0A025" stroke-width="20"  stroke-dasharray="0,1000" fill="none"></circle>
-        <text x="50%" y="50%" text-anchor="middle" stroke="none" stroke-width="1px" dy=".3em" id="_cir_Per">0%</text>
+        <text x="50%" y="50%" text-anchor="middle" stroke="none" stroke-width="1px" dy=".3em" id="_cir_Per" ng-model="percentage">{{percentage}}</text>
         </svg>
 
         <!--377-->
 
-        <button onclick="__showProgress(46)">Click Me</button> 
+        <button ng-click="__showProgress(46)">Click Me</button> 
 
         <script>
-
-            /*
-             * @Author: Vinod Selvin
-             * @Desc: Shows progress bar.
-             * @
-             */
-            function __showProgress(_upto) {
-
-                //Filter Percentage
+        angular.module('myProgressBarApp', [])
+.controller('myCtrl', ['$scope', function($scope) {
+    $scope.percentage="0%";
+    $scope.__showProgress = function(_upto) {
+        //Filter Percentage
                 _upto = (_upto > 100) ? 100 : ((_upto < 0) ? 0 : _upto);
 
                 var _progress = 0;
+                //alert(_upto);
 
-                var _cir_progress = document.getElementById("_cir_P_y");
-                var _text_percentage = document.getElementById("_cir_Per");
+                var _cir_progress = angular.element(document.querySelector( '#_cir_P_y'));
+                var _text_percentage = angular.element(document.querySelector( '#_cir_Per'));
 
                 var _input_percentage;
                 var _percentage;
                 
-                var _sleep = setInterval(_animateCircle, 25);
-                
-                function _animateCircle() {
-                    
-                    _input_percentage = (_upto / 100) * 382;
+                var _sleep = setInterval(function($scope){
+                     _input_percentage = (_upto / 100) * 382;
                     _percentage = (_progress / 100) * 382;
                     
-                    _text_percentage.innerHTML = _progress + '%';
+                    //_text_percentage.innerHTML = _progress + '%';
+                    //$scope.percentage=_progress+"%";
                     
                     if (_percentage >= _input_percentage) {
                         
@@ -55,11 +48,25 @@
                     } else {
                         
                         _progress++;
+                        $scope.percentage=_progress+"%";
                         
-                        _cir_progress.style.strokeDasharray = _percentage + ', 1000';
+                        _cir_progress[0].style.strokeDasharray = _percentage + ', 1000';
                     }
-                }
-            }
+
+
+                }, 25);
+                
+            
+    };
+}]);
+      
+
+            /*
+             * @Author: Vinod Selvin
+             * @Desc: Shows progress bar.
+             * @
+             */
+            
         </script>
     </body>
 </html>
