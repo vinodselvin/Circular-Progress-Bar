@@ -3,15 +3,15 @@
  * @Desc: Shows progress bar.
  * @Params: _upto -> upto that percentage.
  */
-function __showProgress(_upto) {
+function __showProgress(_upto, _cir_progress_id) {
 
     //Filter Percentage
     _upto = (_upto > 100) ? 100 : ((_upto < 0) ? 0 : _upto);
 
     var _progress = 0;
 
-    var _cir_progress = $("#_cir_P_y");
-    var _text_percentage = $("#_cir_Per");
+    var _cir_progress = $("#"+_cir_progress_id).find("._cir_P_y");
+    var _text_percentage = $("#"+_cir_progress_id).find("._cir_Per");
 
     var _input_percentage;
     var _percentage;
