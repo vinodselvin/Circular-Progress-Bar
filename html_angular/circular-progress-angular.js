@@ -8,11 +8,11 @@ angular.module('myProgressBarApp', [])
 
             $scope.percentage = "0%";
 
-            $scope.__showProgress = function (_upto) {
+            $scope.__showProgress = function (_start, _upto) {
                 //Filter Percentage
                 _upto = (_upto > 100) ? 100 : ((_upto < 0) ? 0 : _upto);
 
-                var _progress = 0;
+                var _progress = _start;
 
                 var _cir_progress = angular.element(document.querySelector('#_cir_P_y'));
                 var _text_percentage = angular.element(document.querySelector('#_cir_Per'));
