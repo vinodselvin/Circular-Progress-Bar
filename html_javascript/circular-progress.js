@@ -3,6 +3,9 @@
  * @Desc: Shows progress bar.
  * @Params: _upto -> upto that percentage.
  */
+
+window.onload = init;
+
 function __showProgress(_from, _upto, _cir_progress_id) {
 
     //Filter Percentage
@@ -38,5 +41,22 @@ function __showProgress(_from, _upto, _cir_progress_id) {
             _cir_progress.style.strokeDasharray = _percentage + ', 1000';
         }
     }
+
+}
+
+function _initializeCircle(elem){
+  console.log("setting level to given percentage...");
+      var _cir_progress = elem.getElementsByClassName("_cir_P_y")[0];
+      var _text_percentage = elem.getElementsByClassName("_cir_Per")[0].innerHTML.slice(0,-1);
+      var _percentage = (parseInt(_text_percentage) / 100 ) * 382;
+      _cir_progress.style.strokeDasharray = _percentage + ', 1000';
+}
+
+function init(){
+  var progressMeters = document.getElementsByTagName("svg");
+  for(var i = 0; i < progressMeters.length; i++){
+    _initializeCircle(progressMeters[i]);
+
+  }
 }
 
