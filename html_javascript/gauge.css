@@ -1,0 +1,26 @@
+#buttons {
+	text-align: center;
+	width: 120px;
+	margin-left: 40px;
+}
+
+#buttons div {
+	background-color: #E0CC97;
+	margin: 3px;
+	border-radius: 5px;
+	border: solid #004C70 3px;
+	height: 20px;
+	color: #004C70;
+	font-family: Arial;
+	font-size: 18px;
+}
+
+#buttons div button {
+	width: 100%;
+	background-color: #E0CC97;
+	border: none;
+	font-family: Arial;
+	font-size: 18px;
+	height: 20px;
+
+}

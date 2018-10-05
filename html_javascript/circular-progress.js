@@ -4,10 +4,26 @@
  * @Params: _upto -> upto that percentage.
  */
 
+
+var gauge = {
+  level : 0,
+  displayId : "_cir_progress_1",
+  updatePercent : function(percent){
+    __showProgress(this.level, percent, this.displayId);
+    this.level = percent;
+  }
+};
+
 window.onload = init;
 
 function __showProgress(_from, _upto, _cir_progress_id) {
-
+    var direction = "";
+    if(_from < _upto){
+      direction = "up";
+    } else {
+      direction = "down";
+    }
+    console.log("Going from " + _from + " " + direction + " to " + _upto + "%...");
     //Filter Percentage
     _upto = (_upto > 100) ? 100 : ((_upto < 0) ? 0 : _upto);
 
@@ -31,15 +47,29 @@ function __showProgress(_from, _upto, _cir_progress_id) {
 
         _text_percentage.innerHTML = _progress + '%';
 
-        if (_percentage >= _input_percentage) {
+        if (_stoppingCondition(_percentage,_input_percentage)) {
 
             clearInterval(_sleep);
         } else {
-
-            _progress++;
+            if(direction === "up"){
+              _progress++;
+            } else {
+              _progress--;
+            }
 
             _cir_progress.style.strokeDasharray = _percentage + ', 1000';
         }
+    }
+
+    function _stoppingCondition(current, destination){
+       var goingUp = direction === "up";
+       if (goingUp && current >= destination){
+          return true;
+       } else if (!goingUp && current <= destination){
+          return true;
+       } else {
+          return false;
+       }
     }
 
 }
