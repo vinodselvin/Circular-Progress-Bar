@@ -9,8 +9,7 @@ function __showProgress(_upto, _cir_progress_id) {
 
   var $_cir_progress = $("#" + _cir_progress_id);
 
-  if (!$_cir_progress.attr("data-progress"))
-    $_cir_progress.attr("data-progress", 0);
+  if (!$_cir_progress.attr("data-progress")) $_cir_progress.attr("data-progress", 0);
 
   var _progress = +$_cir_progress.attr("data-progress");
 
