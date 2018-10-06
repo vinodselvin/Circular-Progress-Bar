@@ -4,35 +4,37 @@
  * @Params: _upto -> upto that percentage.
  */
 function __showProgress(_upto, _cir_progress_id) {
+  //Filter Percentage
+  _upto = _upto > 100 ? 100 : _upto < 0 ? 0 : _upto;
 
-    //Filter Percentage
-    _upto = (_upto > 100) ? 100 : ((_upto < 0) ? 0 : _upto);
+  var $_cir_progress = $("#" + _cir_progress_id);
 
-    var _progress = 0;
+  if (!$_cir_progress.attr("data-progress"))
+    $_cir_progress.attr("data-progress", 0);
 
-    var _cir_progress = $("#"+_cir_progress_id).find("._cir_P_y");
-    var _text_percentage = $("#"+_cir_progress_id).find("._cir_Per");
+  var _progress = +$_cir_progress.attr("data-progress");
 
-    var _input_percentage;
-    var _percentage;
+  var _cir_progress = $_cir_progress.find("._cir_P_y");
+  var _text_percentage = $_cir_progress.find("._cir_Per");
 
-    var _sleep = setInterval(_animateCircle, 25);
+  var _input_percentage;
+  var _percentage;
 
-    function _animateCircle() {
+  var _sleep = setInterval(_animateCircle, 25);
 
-        _input_percentage = (_upto / 100) * 382;
-        _percentage = (_progress / 100) * 382;
+  function _animateCircle() {
+    _input_percentage = (_upto / 100) * 382;
+    _percentage = (_progress / 100) * 382;
 
-        _text_percentage.html(_progress + '%');
+    _text_percentage.html(_progress + "%");
+    $_cir_progress.attr("data-progress", _progress);
 
-        if (_percentage >= _input_percentage) {
+    if (_percentage >= _input_percentage) {
+      clearInterval(_sleep);
+    } else {
+      _progress++;
 
-            clearInterval(_sleep);
-        } else {
-
-            _progress++;
-
-            _cir_progress.attr("stroke-dasharray", _percentage + ',388');
-        }
+      _cir_progress.attr("stroke-dasharray", _percentage + ",388");
     }
+  }
 }
