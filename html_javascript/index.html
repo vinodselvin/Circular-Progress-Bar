@@ -7,6 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="circular-progress.js"></script>
+        <link rel="stylesheet" href="gauge.css">
     </head>
     <body>
         <svg height="200" width="200" id="_cir_progress_1">
@@ -14,12 +15,37 @@
             <circle class="_cir_P_y" cx="100" cy="100" r="60" stroke="#E0A025" stroke-width="20"  stroke-dasharray="0,1000" fill="none"></circle>
             <text x="50%" y="50%" text-anchor="middle" stroke="none" stroke-width="1px" dy=".3em" class="_cir_Per">0%</text>
         </svg>
-        <button onclick="__showProgress(60,'_cir_progress_1')">Show 60%</button>
-        <svg height="200" width="200" id="_cir_progress_2">
-            <circle class="_cir_P_x" cx="100" cy="100" r="60" stroke="#004C70" stroke-width="20" fill="#E0CC97"></circle>
-            <circle class="_cir_P_y" cx="100" cy="100" r="60" stroke="#E0A025" stroke-width="20"  stroke-dasharray="0,1000" fill="none"></circle>
-            <text x="50%" y="50%" text-anchor="middle" stroke="none" stroke-width="1px" dy=".3em" class="_cir_Per">0%</text>
-        </svg>
-        <button onclick="__showProgress(30, '_cir_progress_2')">Show 30%</button>
+        <div id="buttons">
+            <div>
+                <button onclick="gauge.updatePercent(0)">0%</button>
+            </div>
+            <div>
+                <button onclick="gauge.updatePercent(10)">10%</button>
+            </div>
+            <div>
+                <button onclick="gauge.updatePercent(20)">20%</button>
+            </div>
+            <div>
+                <button onclick="gauge.updatePercent(30)">30%</button>
+            </div>
+            <div>
+                <button onclick="gauge.updatePercent(40)">40%</button>
+            </div>
+            <div>
+                <button onclick="gauge.updatePercent(50)">50%</button>
+            </div>
+            <div>
+                <button onclick="gauge.updatePercent(70)">70%</button> 
+            </div>
+            <div>
+                <button onclick="gauge.updatePercent(80)">80%</button> 
+            </div>
+            <div>
+                <button onclick="gauge.updatePercent(90)">90%</button> 
+            </div>
+            <div>
+                <button onclick="gauge.updatePercent(100)">100%</button> 
+            </div>
+        </div>
     </body>
 </html>
